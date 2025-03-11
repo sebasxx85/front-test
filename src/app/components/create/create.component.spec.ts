@@ -1,20 +1,26 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { TestBed } from '@angular/core/testing';
 import { CreateComponent } from './create.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ProductService } from '../../services/product.service';
 
 describe('CreateComponent', () => {
   let component: CreateComponent;
-  let fixture: ComponentFixture<CreateComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CreateComponent]
-    })
-    .compileComponents();
+      imports: [ReactiveFormsModule, HttpClientTestingModule], // ✅ Agregado HttpClientTestingModule
+      providers: [
+        ProductService,
+        {
+          provide: ActivatedRoute,
+          useValue: { snapshot: { paramMap: { get: () => '1' } } }, // ✅ Mock de ActivatedRoute
+        },
+      ],
+    }).compileComponents();
 
-    fixture = TestBed.createComponent(CreateComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    component = TestBed.createComponent(CreateComponent).componentInstance;
   });
 
   it('should create', () => {
