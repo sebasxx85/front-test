@@ -29,7 +29,7 @@ import { StatusComponent } from '../../components/status/status.component';
     CommonModule,
     //LayoutComponent,
     SideMenuComponent,
-    // ProductListComponent,
+    //ProductListComponent,
     //ProductTableComponent,
     StatusComponent,
     MatCardModule,
