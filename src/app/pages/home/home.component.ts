@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product.model';
-import { LayoutComponent } from '../../components/layout/layout.component';
 import { SideMenuComponent } from '../../components/side-menu/side-menu.component';
 import { LoadingService } from '../../services/loading.service';
-import { environment } from '../../../environments/environment';
-import { ProductListComponent } from '../../components/product-list/product-list.component';
-import { ProductTableComponent } from '../../components/product-table/product-table.component';
 import { CommonModule } from '@angular/common';
 
 //Importar módulos de Angular Material correctamente
@@ -122,13 +118,13 @@ export class HomeComponent {
 
   getPriceStatusColor(price: number): StatusColor {
     if (price > 0 && price < 100) {
-      return StatusColor.success; // ✅ Verde (Barato)
+      return StatusColor.success; // Verde (Barato)
     } else if (price >= 101 && price < 500) {
-      return StatusColor.warning; // ✅ Amarillo (Medio)
+      return StatusColor.warning;  //Amarillo (Medio)
     } else if (price >= 501) {
-      return StatusColor.error; // ✅ Rojo (Caro)
+      return StatusColor.error; //Rojo (Caro)
     } else {
-      return StatusColor.secondary; // ✅ Default (Si el precio es 0 o inválido)
+      return StatusColor.secondary; //Default (Si el precio es 0 o inválido)
     }
   }
   

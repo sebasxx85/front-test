@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterLink, RouterModule } from '@angular/router';
+import { Component, Optional } from '@angular/core';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
@@ -26,6 +26,7 @@ interface MenuItem {
   styleUrl: './side-menu.component.scss',
 })
 export class SideMenuComponent {
+
   menu: MenuItem[] = [
     {
       label: 'Home',
@@ -36,4 +37,12 @@ export class SideMenuComponent {
       link: '/create',
     },
   ];
+
+  constructor(@Optional() private router?: Router) {} // ✅ Evita errores si Router no está disponible
+
+  navigateTo(link: string): void {
+    if (this.router) {
+      this.router.navigate([link]);
+    }
+  }
 }
