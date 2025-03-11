@@ -91,9 +91,13 @@ export class HomeComponent {
   }
   
   eliminarProducto(product: Product) {
-    console.log('Eliminar producto:', product);
-    
+    if (confirm(`¿Seguro que deseas eliminar "${product.title}"?`)) {
+      this.products = this.products.filter(p => p.id !== product.id);
+      this.productosFiltrados = [...this.products]; 
+      //console.log('Producto eliminado:', product);
+    }
   }
+  
 
 
 }
