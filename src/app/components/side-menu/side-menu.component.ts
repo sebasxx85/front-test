@@ -38,7 +38,7 @@ export class SideMenuComponent {
     },
   ];
 
-  constructor(@Optional() private router?: Router) {} // ✅ Evita errores si Router no está disponible
+  constructor(@Optional() private router?: Router) {} //Evita errores si Router no está disponible
 
   navigateTo(link: string): void {
     if (this.router) {

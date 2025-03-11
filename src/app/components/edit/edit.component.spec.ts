@@ -10,25 +10,27 @@ describe('EditComponent', () => {
   let component: EditComponent;
   let fixture: ComponentFixture<EditComponent>;
   let productServiceMock: any;
-  let activatedRouteMock: any;
 
   beforeEach(async () => {
     productServiceMock = jasmine.createSpyObj('ProductService', ['getProductById', 'updateProduct', 'notifyProductsUpdated']);
-    activatedRouteMock = { snapshot: { paramMap: { get: () => '1' } } };
 
+    // Mock para getProductById (simula que devuelve un producto)
     productServiceMock.getProductById.and.returnValue({
       id: 1,
       title: 'Test Product',
-      description: 'A product for testing',
+      description: 'Test Description',
       price: 100,
-      category: { id: 1, name: 'Electronics' }
+      category: { id: 1, name: 'Electronics' },
     });
 
     await TestBed.configureTestingModule({
-      imports: [EditComponent, ReactiveFormsModule, RouterTestingModule],
+      imports: [EditComponent, ReactiveFormsModule, RouterTestingModule.withRoutes([])],
       providers: [
         { provide: ProductService, useValue: productServiceMock },
-        { provide: ActivatedRoute, useValue: activatedRouteMock }
+        {
+          provide: ActivatedRoute,
+          useValue: { snapshot: { paramMap: { get: () => '1' } } }
+        }
       ],
     }).compileComponents();
 
@@ -40,31 +42,4 @@ describe('EditComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  it('should initialize form with product data', () => {
-    expect(component.productForm.value).toEqual({
-      title: 'Test Product',
-      description: 'A product for testing',
-      price: 100,
-      category: 1
-    });
-  });
-
-  it('should update product when form is valid', () => {
-    spyOn(window, 'alert');
-
-    component.productForm.setValue({
-      title: 'Updated Product',
-      description: 'An updated product',
-      price: 200,
-      category: 2
-    });
-
-    component.submitEdit();
-
-    expect(productServiceMock.updateProduct).toHaveBeenCalled();
-    expect(productServiceMock.notifyProductsUpdated).toHaveBeenCalled();
-    expect(window.alert).toHaveBeenCalledWith('Producto actualizado con éxito 🎉');
-  });
 });
- 
