@@ -18,6 +18,7 @@ import { FormsModule } from '@angular/forms';
 
 // Pipe para truncar texto
 import { TruncatePipe } from '../../pipes/truncate.pipe';
+import { StatusComponent } from '../../components/status/status.component';
 
 
 
@@ -26,10 +27,11 @@ import { TruncatePipe } from '../../pipes/truncate.pipe';
   standalone: true,
   imports: [
     CommonModule,
-    LayoutComponent,
+    //LayoutComponent,
     SideMenuComponent,
     // ProductListComponent,
-    ProductTableComponent,
+    //ProductTableComponent,
+    StatusComponent,
     MatCardModule,
     MatButtonModule,
     MatIconModule,
@@ -55,8 +57,10 @@ export class HomeComponent {
   ngOnInit(): void {
     this.productService.getProducts().subscribe({
       next: (data: Product[]) => {
+        console.log(data);
+        
         this.products = data;
-        this.productosFiltrados = [...this.products]; // Inicialmente, mostrar todos los productos
+        this.productosFiltrados = [...this.products]; 
       },
       error: (err) => console.error('Error al obtener productos:', err),
     });
