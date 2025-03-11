@@ -37,7 +37,8 @@ export class EditComponent implements OnInit {
     { id: 1, name: 'Electronics' },
     { id: 2, name: 'Furniture' },
     { id: 3, name: 'Clothing' },
-    { id: 4, name: 'Toys' }
+    { id: 4, name: 'Toys' },
+    { id: 5, name: 'Others' }
   ];
 
   constructor(
@@ -60,21 +61,41 @@ export class EditComponent implements OnInit {
     
     if (foundProduct) {
       this.product = foundProduct;
-      this.productForm.patchValue(this.product);
+  
+      const categoryId = this.categories.find(cat => cat.name === this.product.category.name)?.id || '';
+  
+    
+      this.productForm.patchValue({
+        title: this.product.title,
+        description: this.product.description,
+        price: this.product.price,
+        category: categoryId  //Asignar el ID de la categoría en lugar del objeto completo
+      });
     }
   }
   
+  
   submitEdit() {
     if (this.productForm.valid) {
-      this.productService.updateProduct(this.productId, this.productForm.value);
+      const updatedProduct = this.productForm.value;
+  
+      //Buscar el objeto de categoría completo basado en el ID seleccionado
+      const selectedCategory = this.categories.find(cat => cat.id === updatedProduct.category);
+  
+      if (selectedCategory) {
+        updatedProduct.category = selectedCategory; 
+      }
+  
+      this.productService.updateProduct(this.productId, updatedProduct);
   
       setTimeout(() => {
         this.productService.notifyProductsUpdated();
         alert('Producto actualizado con éxito 🎉');
         this.router.navigate(['/home']);
-      }, 2000); 
+      }, 2000);
     }
   }
+  
   
   
 }

@@ -33,7 +33,8 @@ export class CreateComponent {
     { id: 1, name: 'Electronics' },
     { id: 2, name: 'Furniture' },
     { id: 3, name: 'Clothing' },
-    { id: 4, name: 'Toys' }
+    { id: 4, name: 'Toys' },
+    { id: 5, name: 'Others' }
   ];
 
   constructor(private fb: FormBuilder) {
