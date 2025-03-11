@@ -7,11 +7,13 @@ import { LoadingService } from '../../services/loading.service';
 import { environment } from '../../../environments/environment';
 import { ProductListComponent } from '../../components/product-list/product-list.component';
 import { ProductTableComponent } from '../../components/product-table/product-table.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
+    CommonModule,
     LayoutComponent,
     SideMenuComponent,
     // ProductListComponent,
@@ -31,10 +33,15 @@ export class HomeComponent {
   ngOnInit(): void {
     setTimeout(() => {
       this.loading.setIsLoading(true);
+
       this.productService.getProducts().subscribe((data) => {
-        this.products = data.products;
+        console.log('Productos recibidos:', data);
+        this.products = data;
         this.loading.setIsLoading(false);
       });
     }, environment.pageInitialStartLoadingServiceDelay);
   }
+
+
+
 }
