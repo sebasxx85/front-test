@@ -52,4 +52,9 @@ export class ProductService {
     this.productsUpdated.next([...this.products]);
   }
 
+  addProduct(product: Product) {
+    this.products.push(product); // 🔹 Agregar producto a la lista
+    this.productsUpdated.next([...this.products]); // 🔹 Notificar actualización
+  }
+
 }
