@@ -1,1 +1,58 @@
-<p>create works!</p>
+<div sidebar-left><app-side-menu></app-side-menu></div>
+
+<mat-card class="product-card">
+    <mat-card-content>
+      <h3>Crear Nuevo Producto</h3>
+  
+      <form [formGroup]="productForm" (ngSubmit)="submitProduct()">
+        <!-- Campo Título -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Título</mat-label>
+          <input matInput formControlName="title" placeholder="Ingrese el título del producto">
+          <mat-error *ngIf="productForm.get('title')?.invalid && productForm.get('title')?.touched">
+            El título es obligatorio y debe tener al menos 3 caracteres.
+          </mat-error>
+        </mat-form-field>
+  
+        <!-- Campo Descripción -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Descripción</mat-label>
+          <textarea matInput formControlName="description" placeholder="Ingrese la descripción"></textarea>
+          <mat-error *ngIf="productForm.get('description')?.invalid && productForm.get('description')?.touched">
+            La descripción es obligatoria y debe tener al menos 10 caracteres.
+          </mat-error>
+        </mat-form-field>
+  
+        <!-- Campo Precio -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Precio</mat-label>
+          <input matInput type="number" formControlName="price" placeholder="Ingrese el precio">
+          <mat-error *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched">
+            El precio es obligatorio y debe ser un número positivo.
+          </mat-error>
+        </mat-form-field>
+  
+        <!-- Campo Categoría -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Categoría</mat-label>
+          <mat-select formControlName="category">
+            <mat-option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="productForm.get('category')?.invalid && productForm.get('category')?.touched">
+            Debe seleccionar una categoría.
+          </mat-error>
+        </mat-form-field>
+  
+        <!-- Botón para enviar el formulario -->
+        <div class="card-actions">
+          <button mat-button class="edit-btn" type="submit" [disabled]="productForm.invalid">
+            Crear
+          </button>
+          <button mat-button class="delete-btn" type="button" (click)="productForm.reset()">
+            Cancelar
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+  

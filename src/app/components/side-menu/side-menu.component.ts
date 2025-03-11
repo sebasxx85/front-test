@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
@@ -16,6 +16,7 @@ interface MenuItem {
   selector: 'app-side-menu',
   standalone: true,
   imports: [RouterLink, 
+    RouterModule,
     MatToolbarModule,
     MatMenuModule,
     MatButtonModule,
