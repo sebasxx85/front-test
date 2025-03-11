@@ -14,7 +14,11 @@
           <mat-card-content>
             <h3>{{ product.title }}</h3>
             <p><span class="label">Descripción:</span> {{ product.description | truncate }}</p> 
-            <p><span class="label">Precio:</span> <app-status [data]="product.price"> </app-status></p>
+            <p>
+              <span class="label">Precio:</span> 
+              <app-status [data]="product.price" [statusColor]="getPriceStatusColor | statusColor: product.price"></app-status>
+            </p>
+            
             <p><span class="label">Categoría:</span> {{ product.category.name }}</p>
           </mat-card-content>
           <div class="card-actions">

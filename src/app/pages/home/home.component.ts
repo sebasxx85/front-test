@@ -18,8 +18,11 @@ import { FormsModule } from '@angular/forms';
 
 // Pipe para truncar texto
 import { TruncatePipe } from '../../pipes/truncate.pipe';
+
 import { StatusComponent } from '../../components/status/status.component';
 import { Router } from '@angular/router';
+import { StatusColor } from '../../components/status/status-color';
+import { StatusColorPipe } from "../../components/status/status-color.pipe";
 
 
 
@@ -38,8 +41,9 @@ import { Router } from '@angular/router';
     MatIconModule,
     MatInputModule,
     FormsModule,
-    TruncatePipe
-  ],
+    TruncatePipe,
+    StatusColorPipe
+],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
@@ -115,9 +119,19 @@ export class HomeComponent {
       this.productService.notifyProductsUpdated(); 
     }
   }
+
+  getPriceStatusColor(price: number): StatusColor {
+    if (price > 0 && price < 100) {
+      return StatusColor.success; // ✅ Verde (Barato)
+    } else if (price >= 101 && price < 500) {
+      return StatusColor.warning; // ✅ Amarillo (Medio)
+    } else if (price >= 501) {
+      return StatusColor.error; // ✅ Rojo (Caro)
+    } else {
+      return StatusColor.secondary; // ✅ Default (Si el precio es 0 o inválido)
+    }
+  }
   
-
-
 }
 
 
