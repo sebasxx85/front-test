@@ -57,15 +57,32 @@ export class HomeComponent {
   ) {}
 
   ngOnInit(): void {
-    this.productService.getProducts().subscribe({
-      next: (data: Product[]) => {
-        this.productService.setProducts(data); 
-        this.products = this.productService.getProductsFromMemory(); 
-        this.productosFiltrados = [...this.products]; 
-      },
-      error: (err) => console.error('Error al obtener productos:', err),
+    //Verificar si hay productos en memoria antes de llamar a la API
+    const cachedProducts = this.productService.getProductsFromMemory();
+  
+    if (cachedProducts.length > 0) {
+      console.log('Cargando productos desde memoria...');
+      this.products = cachedProducts;
+      this.productosFiltrados = [...this.products];
+    } else {
+      console.log('Cargando productos desde la API...');
+      this.productService.getProducts().subscribe({
+        next: (data: Product[]) => {
+          this.productService.setProducts(data); // Guardar en memoria
+          this.products = this.productService.getProductsFromMemory();
+          this.productosFiltrados = [...this.products];
+        },
+        error: (err) => console.error('Error al obtener productos:', err),
+      });
+    }
+  
+    this.productService.getProductsUpdatedListener().subscribe(updatedProducts => {
+      this.products = updatedProducts;
+      this.productosFiltrados = [...this.products];
     });
   }
+  
+  
 
   siguiente(): void {
     if (this.inicio + this.itemsPorPagina < this.productosFiltrados.length) {

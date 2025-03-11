@@ -66,10 +66,15 @@ export class EditComponent implements OnInit {
   
   submitEdit() {
     if (this.productForm.valid) {
-      //Modificar el producto en memoria (NO en la API)
       this.productService.updateProduct(this.productId, this.productForm.value);
-      alert('Producto actualizado con éxito 🎉');
-      this.router.navigate(['/home']);
+  
+      setTimeout(() => {
+        this.productService.notifyProductsUpdated();
+        alert('Producto actualizado con éxito 🎉');
+        this.router.navigate(['/home']);
+      }, 2000); 
     }
   }
+  
+  
 }
