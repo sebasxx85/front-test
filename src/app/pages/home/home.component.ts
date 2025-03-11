@@ -59,9 +59,8 @@ export class HomeComponent {
   ngOnInit(): void {
     this.productService.getProducts().subscribe({
       next: (data: Product[]) => {
-        console.log(data);
-        
-        this.products = data;
+        this.productService.setProducts(data); 
+        this.products = this.productService.getProductsFromMemory(); 
         this.productosFiltrados = [...this.products]; 
       },
       error: (err) => console.error('Error al obtener productos:', err),

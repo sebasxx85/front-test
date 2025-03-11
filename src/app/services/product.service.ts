@@ -9,6 +9,7 @@ import { environment } from '../../environments/environment';
 })
 export class ProductService {
   private readonly apiUrl = `${environment.apiBaseURL}/products`;
+  private products: Product[] = []; //
 
   constructor(private http: HttpClient) {}
 
@@ -26,4 +27,22 @@ export class ProductService {
   }
   
 
+  setProducts(products: Product[]) {
+    this.products = products;
+  }
+
+  getProductsFromMemory(): Product[] {
+    return this.products;
+  }
+
+  getProductById(id: number): Product | undefined {
+    return this.products.find(p => p.id === id);
+  }
+
+  updateProduct(id: number, updatedProduct: Partial<Product>) {
+    const index = this.products.findIndex(p => p.id === id);
+    if (index !== -1) {
+      this.products[index] = { ...this.products[index], ...updatedProduct };
+    }
+  }
 }

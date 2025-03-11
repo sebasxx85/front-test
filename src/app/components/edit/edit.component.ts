@@ -55,8 +55,7 @@ export class EditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.productId = Number(this.route.snapshot.paramMap.get('id')); // ✅ Obtener ID de la URL
-
+    this.productId = Number(this.route.snapshot.paramMap.get('id')); 
     const foundProduct = this.productService.getProductById(this.productId);
     
     if (foundProduct) {
@@ -64,13 +63,13 @@ export class EditComponent implements OnInit {
       this.productForm.patchValue(this.product);
     }
   }
-
+  
   submitEdit() {
     if (this.productForm.valid) {
-      // ✅ Modificar el producto en memoria
+      //Modificar el producto en memoria (NO en la API)
       this.productService.updateProduct(this.productId, this.productForm.value);
       alert('Producto actualizado con éxito 🎉');
-      this.router.navigate(['/home']); // ✅ Volver al Home
+      this.router.navigate(['/home']);
     }
   }
 }
