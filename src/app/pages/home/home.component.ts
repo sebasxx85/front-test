@@ -19,6 +19,7 @@ import { FormsModule } from '@angular/forms';
 // Pipe para truncar texto
 import { TruncatePipe } from '../../pipes/truncate.pipe';
 import { StatusComponent } from '../../components/status/status.component';
+import { Router } from '@angular/router';
 
 
 
@@ -51,7 +52,8 @@ export class HomeComponent {
 
   constructor(
     private productService: ProductService,
-    private loading: LoadingService
+    private loading: LoadingService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -86,7 +88,8 @@ export class HomeComponent {
   }
 
   editarProducto(product: Product) {
-    console.log('Editar producto:', product);
+   // console.log('Editar producto:', product);
+    this.router.navigate(['/edit', product.id]);
     
   }
   
