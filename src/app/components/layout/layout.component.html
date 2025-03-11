@@ -1,0 +1,18 @@
+<div class="container">
+  <!-- Left Sidebar -->
+  <aside class="sidebar-left">
+    <ng-content select="[sidebar-left]"></ng-content>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <ng-content select="[main-content]"></ng-content>
+  </main>
+
+  <!-- Right Sidebar -->
+  <aside *ngIf="sideRight" class="sidebar-right">
+    <ng-content select="[sidebar-right]"></ng-content>
+  </aside>
+</div>
+
+<app-loading *ngIf="isLoading" />
