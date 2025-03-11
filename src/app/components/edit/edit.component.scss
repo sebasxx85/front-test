@@ -34,3 +34,50 @@
     margin-bottom: 17px;
   }
   
+   ////////////////////////////////* Contenedor del spinner *//////////////////////////////////
+.spinner-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-spinner {
+  width: 80px;
+  height: 80px;
+  border: 10px solid rgba(0, 0, 0, 0.1); /* Borde gris claro */
+  border-top: 10px solid #DFDF85; /* Amarillo (#DFDF85) */
+  border-right: 10px solid #e8e897; /* Naranja pálido (#FFC48C) */
+  border-radius: 50%;
+  animation: spin 1.2s linear infinite, color-change 2s linear infinite;
+}
+
+/* Animación de rotación */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Animación de cambio de color */
+@keyframes color-change {
+  0% {
+    border-top-color: #d5cbe9; 
+    border-right-color: #b6d6e4; 
+  }
+  50% {
+    border-top-color: #d5cbe9; 
+    border-right-color: #b6d6e4; 
+  }
+  100% {
+    border-top-color: #d5cbe9; 
+    border-right-color: #b6d6e4; 
+  }
+}

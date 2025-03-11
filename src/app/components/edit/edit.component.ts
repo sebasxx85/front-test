@@ -32,6 +32,7 @@ export class EditComponent implements OnInit {
   productForm: FormGroup;
   productId!: number;
   product!: Product;
+  loading2 = false
 
   categories = [
     { id: 1, name: 'Electronics' },
@@ -77,6 +78,7 @@ export class EditComponent implements OnInit {
   
   submitEdit() {
     if (this.productForm.valid) {
+      this.loading2 = true; 
       const updatedProduct = this.productForm.value;
   
       //Buscar el objeto de categoría completo basado en el ID seleccionado
@@ -92,6 +94,7 @@ export class EditComponent implements OnInit {
         this.productService.notifyProductsUpdated();
         alert('Producto actualizado con éxito 🎉');
         this.router.navigate(['/home']);
+        this.loading2 = false; 
       }, 2000);
     }
   }

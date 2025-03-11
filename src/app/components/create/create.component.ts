@@ -31,6 +31,7 @@ import { ProductService } from '../../services/product.service';
 export class CreateComponent {
 
   productForm: FormGroup;
+  loading2 = false
 
   categories = [
     { id: 1, name: 'Electronics' },
@@ -58,6 +59,7 @@ export class CreateComponent {
 
   submitProduct() {
     if (this.productForm.valid) {
+      this.loading2 = true
       const newProduct: Product = {
         id: Date.now(), //Usar timestamp como ID temporal ya que no usamos API
         ...this.productForm.value,
@@ -71,7 +73,8 @@ export class CreateComponent {
         this.productService.notifyProductsUpdated(); 
         alert('Producto creado con éxito 🎉');
         this.router.navigate(['/home']); 
-      }, 200);
+        this.loading2 = false
+      }, 1700);
     }
   }
 }  

@@ -49,6 +49,7 @@ export class HomeComponent {
   productosFiltrados: Product[] = [];
   inicio: number = 0;
   itemsPorPagina: number = 4; // Cantidad de tarjetas visibles
+  loading2 = false
 
   constructor(
     private productService: ProductService,
@@ -104,17 +105,26 @@ export class HomeComponent {
   }
 
   editarProducto(product: Product) {
-   // console.log('Editar producto:', product);
-    this.router.navigate(['/edit', product.id]);
+    this.loading2 = true; 
     
+    setTimeout(() => {
+      this.router.navigate(['/edit', product.id]); // Navega a la página de edición
+      this.loading2 = false; 
+    }, 1700); 
   }
   
   eliminarProducto(product: Product) {
     if (confirm(`¿Seguro que deseas eliminar "${product.title}"?`)) {
-      this.productService.deleteProduct(product.id); //Eliminar en memoria
-      this.productService.notifyProductsUpdated(); 
+      this.loading2 = true;
+  
+      setTimeout(() => {
+        this.productService.deleteProduct(product.id);
+        this.productService.notifyProductsUpdated();
+        this.loading2 = false;
+      }, 1200);
     }
   }
+  
 
   getPriceStatusColor(price: number): StatusColor {
     if (price > 0 && price < 100) {
