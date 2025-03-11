@@ -1,7 +1,21 @@
-<div>
-  <ul>
-    <li *ngFor="let item of menu">
-      <a [routerLink]="item.link">{{ item.label }}</a>
-    </li>
-  </ul>
-</div>
+<header>
+  <mat-toolbar class="toolbar">
+    <!-- Botón de menú para dispositivos móviles -->
+    <button mat-icon-button [matMenuTriggerFor]="menuDropdown">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <span class="toolbar-title">
+      <a [routerLink]="'/home'">Front test</a>
+    </span>
+
+    <span class="spacer"></span>
+
+    <!-- Menú desplegable -->
+    <mat-menu #menuDropdown="matMenu">
+      <button mat-menu-item *ngFor="let item of menu" [routerLink]="item.link">
+        {{ item.label }}
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+</header>

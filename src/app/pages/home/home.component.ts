@@ -84,6 +84,18 @@ export class HomeComponent {
       product.category.name.toLowerCase().includes(termino.toLowerCase())
     );
   }
+
+  editarProducto(product: Product) {
+    console.log('Editar producto:', product);
+    
+  }
+  
+  eliminarProducto(product: Product) {
+    console.log('Eliminar producto:', product);
+    
+  }
+
+
 }
 
 

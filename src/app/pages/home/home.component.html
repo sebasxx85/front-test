@@ -10,12 +10,21 @@
       <!-- Contenedor de Productos -->
       <div class="carousel-inner">
         <mat-card class="product-card" *ngFor="let product of productosFiltrados.slice(inicio, inicio + itemsPorPagina)">
+         
           <mat-card-content>
             <h3>{{ product.title }}</h3>
-            <p><span class="label">Categoría:</span> {{ product.category.name }}</p>
             <p><span class="label">Descripción:</span> {{ product.description | truncate }}</p> 
             <p><span class="label">Precio:</span> <app-status [data]="product.price"> </app-status></p>
+            <p><span class="label">Categoría:</span> {{ product.category.name }}</p>
           </mat-card-content>
+          <div class="card-actions">
+            <button mat-button class="edit-btn" (click)="editarProducto(product)">
+              Editar
+            </button>
+            <button mat-button class="delete-btn" (click)="eliminarProducto(product)">
+              Eliminar
+            </button>
+          </div>
         </mat-card>
       </div>
     
