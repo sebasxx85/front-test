@@ -53,8 +53,14 @@ export class ProductService {
   }
 
   addProduct(product: Product) {
-    this.products.push(product); // 🔹 Agregar producto a la lista
-    this.productsUpdated.next([...this.products]); // 🔹 Notificar actualización
+    this.products.unshift(product); //Agregar el producto al inicio de la lista
+    this.productsUpdated.next([...this.products]); 
   }
+
+  deleteProduct(id: number) {
+    this.products = this.products.filter(p => p.id !== id);
+    this.productsUpdated.next([...this.products]); 
+  }
+  
 
 }

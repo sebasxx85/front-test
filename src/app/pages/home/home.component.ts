@@ -111,9 +111,8 @@ export class HomeComponent {
   
   eliminarProducto(product: Product) {
     if (confirm(`¿Seguro que deseas eliminar "${product.title}"?`)) {
-      this.products = this.products.filter(p => p.id !== product.id);
-      this.productosFiltrados = [...this.products]; 
-      //console.log('Producto eliminado:', product);
+      this.productService.deleteProduct(product.id); //Eliminar en memoria
+      this.productService.notifyProductsUpdated(); 
     }
   }
   
